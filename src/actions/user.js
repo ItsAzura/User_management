@@ -22,3 +22,19 @@ export const AddUser = async ({ firstName, lastName, email, address }) => {
     return { error: 'An error occurred', status: 500 };
   }
 };
+
+//Hàm lấy danh sách User từ db
+export const DisplayUsers = async () => {
+  await connectToDatabase();
+  try {
+    const users = await User.find();
+    if (users) {
+      return { data: users, status: 200 };
+    } else {
+      return { error: 'No users found', status: 404 };
+    }
+  } catch (error) {
+    console.log(error);
+    return { error: 'An error occurred', status: 500 };
+  }
+};
