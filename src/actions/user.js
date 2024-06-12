@@ -38,3 +38,35 @@ export const DisplayUsers = async () => {
     return { error: 'An error occurred', status: 500 };
   }
 };
+
+//Hàm chỉnh sửa thông tin User
+export const EditUser = async ({ firstName, lastName, email, address }) => {
+  await connectToDatabase();
+
+  try {
+    //Kiểm tra xem các trường thông tin có được điền đầy đủ không
+    if (!firstName || !lastName || !email || !address) {
+      return { error: 'Please fill in all fields', status: 400 };
+    }
+
+    //Tìm User theo email
+    const user = await User.findOne({ email });
+
+    //Nếu User tồn tại thì cập nhật thông tin
+    if (user) {
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.email = email;
+      user.address = address;
+
+      await user.save();
+      return { message: 'User updated successfully', status: 200 };
+    } else {
+      //Nếu User không tồn tại thì trả về thông báo lỗi
+      return { error: 'User not found', status: 404 };
+    }
+  } catch (error) {
+    console.log(error);
+    return { error: 'An error occurred', status: 500 };
+  }
+};

@@ -17,6 +17,7 @@
   user-select: none;
   font-weight: bolder;
   color: white;
+  gap: 12px;
 }
 
 .card:hover {
@@ -31,4 +32,10 @@
 .card h1 {
   font-size: 1rem;
   margin: 0;
+}
+
+.groupBtn {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
