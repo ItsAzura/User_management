@@ -15,7 +15,9 @@ const Card = ({ user }) => {
         <EditBtn
           user={user} //Gửi thông tin user vào EditBtn
         />
-        <DeleteBtn />
+        <DeleteBtn 
+        userEmail={user.email} //Gửi email của user vào DeleteBtn
+        />
       </div>
     </div>
   );
